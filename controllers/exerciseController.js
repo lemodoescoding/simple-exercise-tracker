@@ -1,7 +1,5 @@
-const mongoose = require('mongoose');
 const Exercise = require('../models/Exercise');
 const User = require('../models/User');
-const http = require('http');
 
 const storeExercise = async (req, res) => {
   const userId = req.params._id;
@@ -9,10 +7,10 @@ const storeExercise = async (req, res) => {
   let { description, duration, date } = req.body;
   const checkValidDate = /(\d{4})\-(0[1-9]|1[1-2])\-(0[1-9]|[12]\d|3[01])/g;
 
-  if(`${date}`.length > 0 && !`${date}`.match(checkValidDate)){
-      res.setHeader('Content-Type', 'application/json');
-      return res.end(JSON.stringify({'error': 'invalid date'}));
-  }
+  // if(`${date}`.length > 0 && !`${date}`.match(checkValidDate)){
+  //     res.setHeader('Content-Type', 'application/json');
+  //     return res.end(JSON.stringify({'error': 'invalid date'}));
+  // }
 
   try {
     const checkId = await User.findById(userId);
@@ -95,7 +93,6 @@ const searchExerciseLog = async (req, res) => {
       "log": exerciseLogs
     }
 
-    res.setHeader('Content-Type', 'application/json');
     return res.json(finalRes);
   } catch(err){
     console.error(err);
