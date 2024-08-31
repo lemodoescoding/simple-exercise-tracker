@@ -9,7 +9,7 @@ const storeExercise = async (req, res) => {
   let { description, duration, date } = req.body;
   const checkValidDate = /(\d{4})\-(0[1-9]|1[1-2])\-(0[1-9]|[12]\d|3[01])/g;
 
-  if(`${date}`.length > 0 && !date.match(checkValidDate)){
+  if(`${date}`.length > 0 && !`${date}`.match(checkValidDate)){
       res.setHeader('Content-Type', 'application/json');
       return res.end(JSON.stringify({'error': 'invalid date'}));
   }
@@ -90,9 +90,9 @@ const searchExerciseLog = async (req, res) => {
 
     let finalRes = {
       "_id": checkId._id,
-      "userName": checkId.userName,
-      "count": searchLogs.length,
-      "log": searchLogs
+      "username": checkId.userName,
+      "count": exerciseLogs.length,
+      "log": exerciseLogs
     }
 
     res.setHeader('Content-Type', 'application/json');

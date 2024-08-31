@@ -25,4 +25,24 @@ const createNewUser = async (req, res) => {
   }
 }
 
-module.exports = { createNewUser };
+const getUsers = async (req, res) => {
+  const listUsers = [];
+  try {
+    const users = await User.find();
+    
+    users.map(user => {
+      listUsers.push({
+        _id: user._id,
+        username: user.userName,
+        __v: user.__v
+      });
+    })
+
+    res.setHeader('Content-Type', 'application/json');
+    return res.json(listUsers);
+  } catch(err){
+    console.error(err)
+  }
+}
+
+module.exports = { createNewUser, getUsers};
